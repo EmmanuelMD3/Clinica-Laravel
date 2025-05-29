@@ -10,10 +10,9 @@ class AdminUsuarioController extends Controller
 {
     public function index()
     {
-        $usuarios = \App\Models\User::whereIn('rol', ['Médico', 'Enfermera'])->get();
+        $usuarios = User::whereIn('rol', ['Médico', 'Enfermera'])->get();
         return view('admin.usuarios', compact('usuarios'));
     }
-
 
     public function store(Request $request)
     {
@@ -31,6 +30,39 @@ class AdminUsuarioController extends Controller
             'rol' => $request->rol,
         ]);
 
-        return redirect()->back()->with('success', 'Usuario registrado exitosamente.');
+        return redirect()->route('admin.usuarios.index')->with('success', 'Usuario registrado exitosamente.');
+    }
+
+    public function edit($id)
+    {
+        $usuario = User::findOrFail($id);
+        return view('admin.editar_usuario', compact('usuario'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $usuario = User::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $usuario->id,
+            'rol' => 'required|in:Médico,Enfermera',
+        ]);
+
+        $usuario->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'rol' => $request->rol,
+        ]);
+
+        return redirect()->route('admin.usuarios.index')->with('success', 'Usuario actualizado correctamente.');
+    }
+
+    public function destroy($id)
+    {
+        $usuario = User::findOrFail($id);
+        $usuario->delete();
+
+        return redirect()->route('admin.usuarios.index')->with('success', 'Usuario eliminado correctamente.');
     }
 }

@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2 class="text-2xl font-bold mb-4">Registrar nuevo usuario</h2>
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold">Registrar nuevo usuario</h2>
+        <a href="{{ route('admin.dashboard') }}" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">
+            ← Volver al Panel
+        </a>
+    </div>
 
     <form action="{{ route('admin.usuarios.store') }}" method="POST" class="space-y-4">
         @csrf
@@ -65,6 +70,5 @@
                 @endforelse
             </tbody>
         </table>
-
     </form>
 @endsection
