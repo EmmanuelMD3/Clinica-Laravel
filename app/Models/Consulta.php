@@ -28,4 +28,5 @@ class Consulta extends Model
     {
         return $this->belongsTo(User::class, 'medico_id');
     }
+
 }

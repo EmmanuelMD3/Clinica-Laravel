@@ -17,6 +17,17 @@
         @csrf
 
         <div>
+            <label class="block">Selecciona un médico</label>
+            <select name="medico_id" class="w-full border p-2 rounded" required>
+                <option value="">-- Selecciona un médico --</option>
+                @foreach ($medicos as $medico)
+                    <option value="{{ $medico->id }}">{{ $medico->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+
+        <div>
             <label class="block">Fecha</label>
             <input type="date" name="fecha" class="w-full border p-2 rounded" required>
         </div>

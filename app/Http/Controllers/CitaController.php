@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Consulta;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class ConsultaController extends Controller
+class CitaController extends Controller
 {
+
     public function create()
     {
         $medicos = User::where('rol', 'Médico')->get();
@@ -53,6 +51,4 @@ class ConsultaController extends Controller
         $consultas = \App\Models\Consulta::with(['paciente', 'medico'])->latest()->get();
         return view('admin.citas.index', compact('consultas'));
     }
-
-
 }

@@ -7,8 +7,10 @@
         <h2 class="text-xl font-bold mb-6">Administrador</h2>
         <ul class="space-y-4">
             <li><a href="{{ route('admin.usuarios.index') }}" class="hover:underline">👨‍⚕️ Usuarios</a></li>
-            <li><a href="#" class="hover:underline">📋 Citas</a></li>
-            <li><a href="#" class="hover:underline">📈 Reportes</a></li>
+            <li><a href="{{ route('admin.citas.index') }}" class="hover:underline">📋 Citas</a></li>
+            <li><a href="{{ route('admin.reportes') }}" class="hover:underline">📈 Reportes</a></li>
+
+
             <li>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
